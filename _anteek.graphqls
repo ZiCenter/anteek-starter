@@ -1,0 +1,38 @@
+directive @many on FIELD_DEFINITION
+directive @one on FIELD_DEFINITION
+directive @hash on FIELD_DEFINITION
+directive @http(input: String = "String", request: HttpRequest!, name: String) repeatable on OBJECT
+directive @database(create: Boolean, list: Boolean, aggregate: Boolean, single: Boolean, update: Boolean, delete: Boolean) on OBJECT
+directive @function(name: String!, operation: Operation!, input: String) repeatable on OBJECT
+
+input HttpRequest {
+    method: HTTPMethod
+    url: String
+    headers: String
+    body: String
+    response: String = ""
+}
+
+enum HTTPMethod { GET POST PUT PATCH DELETE }
+enum DataSourceType { HTTP DATABASE }
+enum Operation { Query Mutation }
+
+# --------------- ----------- ------------
+
+directive @security(policies: [DatabasePolicy!]) on OBJECT
+directive @policy on FIELD_DEFINITION
+
+input DatabasePolicy {
+    function: String
+    list: PolicyConfig
+    get: PolicyConfig
+    create: PolicyConfig
+    update: PolicyConfig
+    delete: PolicyConfig
+}
+
+input PolicyConfig {
+    query: String
+    select: String
+    input: String
+}

@@ -1,0 +1,60 @@
+enum OrderStatus {
+    placed approved delivered
+}
+
+enum PetStatus {
+    available, pending, sold
+}
+
+type Tag {
+    name: String
+    pets: [Pet] @many
+}
+
+type Category {
+    name: String
+    pets: [Pet] @one
+}
+
+type Pet {
+    category: Category @many
+    name: String
+    photoUrls: [String]
+    tags: [Tag] @many
+    status: PetStatus
+}
+
+@http(input: "String", name: "wikiPet", request: {
+    method: GET,
+    url: "https://en.wikipedia.org/w/api.php?action=opensearch&search=${input}&limit=1&namespace=0&format=jsonfm",
+    headers: "Content-Type: application/json"
+})
+type PetInfo {
+    name: String
+    details: String
+}
+
+@database(list: true, single: true, aggregate: true, update: true)
+@function(name: "placeOrder", operation: Mutation, input: "PlaceOrderInput")
+type Order {
+    pet: Pet
+    user: User @many
+    quantity: Int
+    shipDate: DateTime
+    status: OrderStatus
+    complete: Boolean
+}
+
+type User {
+    name:	String
+    email:	String
+    password:	string @hash
+    orders: [Order] @one
+}
+
+input PlaceOrderInput {
+    petId: ID!
+    quantity: String
+    shipDate: DateTime
+}
+
