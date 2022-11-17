@@ -10,10 +10,7 @@ const prisma = new PrismaClient();
                 name: faker.animal.cat()
             },
             name: faker.name.firstName(),
-            photoUrls: [
-                faker.image.animals(),
-                faker.image.animals()
-            ],
+            photoUrl: faker.image.animals(),
             tags: [{
                 name: faker.word.noun()
             }],

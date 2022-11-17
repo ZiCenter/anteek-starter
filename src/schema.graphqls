@@ -19,7 +19,7 @@ type Category {
 type Pet {
     category: Category @many
     name: String
-    photoUrls: [String]
+    photoUrl: String
     tags: [Tag] @many
     status: PetStatus
 }
