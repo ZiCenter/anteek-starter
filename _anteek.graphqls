@@ -1,3 +1,5 @@
+scalar DateTime
+
 directive @many on FIELD_DEFINITION
 directive @one on FIELD_DEFINITION
 directive @hash on FIELD_DEFINITION
