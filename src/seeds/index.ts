@@ -7,14 +7,20 @@ const prisma = new PrismaClient();
     await prisma.pet.create({
         data: {
             category: {
-                name: faker.animal.cat()
+                create: {
+                    name: faker.animal.cat()
+                }
             },
             name: faker.name.firstName(),
             photoUrl: faker.image.animals(),
-            tags: [{
-                name: faker.word.noun()
-            }],
-            status: "available"
+            tags: {
+                create: [
+                    {
+                        name: faker.word.noun()
+                    }
+                ]
+            },
+            status: 'available'
         }
     });
 })();
