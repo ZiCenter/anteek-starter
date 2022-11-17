@@ -24,19 +24,21 @@ type Pet {
     status: PetStatus
 }
 
+type PetInfo
 @http(input: "String", name: "wikiPet", request: {
     method: GET,
     url: "https://en.wikipedia.org/w/api.php?action=opensearch&search=${input}&limit=1&namespace=0&format=jsonfm",
     headers: "Content-Type: application/json"
 })
-type PetInfo {
+{
     name: String
     details: String
 }
 
+type Order
 @database(list: true, single: true, aggregate: true, update: true)
 @function(name: "placeOrder", operation: Mutation, input: "PlaceOrderInput")
-type Order {
+{
     pet: Pet
     user: User @many
     quantity: Int
@@ -48,7 +50,7 @@ type Order {
 type User {
     name:	String
     email:	String
-    password:	string @hash
+    password: String @hash
     orders: [Order] @one
 }
 
@@ -57,4 +59,3 @@ input PlaceOrderInput {
     quantity: String
     shipDate: DateTime
 }
-
