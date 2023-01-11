@@ -7,9 +7,12 @@
   "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
-    "build": "tsc && npm run copy:schema",
+    "build": "nest build && npm run copy:schema",
     "format": "prettier --write \"**/*.ts\" \"**/*.ts\"",
-    "start": "node dist/main",
+    "start": "nest start",
+    "start:debug": "nest start --debug --watch",
+    "start:dev": "nest start --watch",
+    "start:prod": "node dist/main",
     "lint": "eslint \"**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch --coverage",
@@ -23,11 +26,16 @@
   },
   "dependencies": {
     "@faker-js/faker": "^7.6.0",
+    "@nestjs/common": "^9.0.0",
+    "@nestjs/core": "^9.0.0",
     "@prisma/client": "^4.6.1",
     "@zicenter/anteek-core": "^1.0.1",
     "dotenv": "^16.0.3"
   },
   "devDependencies": {
+    "@nestjs/cli": "^9.0.0",
+    "@nestjs/schematics": "^9.0.0",
+    "@nestjs/testing": "^9.0.0",
     "@types/jest": "28.1.8",
     "@types/node": "^16.0.0",
     "@types/supertest": "^2.0.11",

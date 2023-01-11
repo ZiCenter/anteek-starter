@@ -1,3 +1,9 @@
-import('@zicenter/anteek-core')
-    .then(({ bootstrap }) => bootstrap())
-    .catch(e => console.error('error starting anteek server', e));
+require('dotenv').config();
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module';
+
+async function bootstrap() {
+    const app = await NestFactory.create(AppModule);
+    await app.listen(3000);
+}
+bootstrap();
