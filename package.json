@@ -6,23 +6,31 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "prebuild": "rimraf dist",
-    "build": "npm run compile && nest build",
-    "compile": "npm run generate && npm run prisma",
+    "prebuild": "concurrently \"rimraf dist\" \"rimraf prisma\" \"rimraf src/__generated__\" ",
+    "build": "concurrently \"npm:anteek:compile\" \"npm:nest:build\" -m 1",
     "format": "prettier --write \"**/*.ts\" \"**/*.ts\"",
-    "start": "nest start",
-    "start:debug": "nest start --debug --watch",
-    "start:dev": "nest start --watch",
-    "start:prod": "node dist/main",
     "lint": "eslint \"**/*.ts\" --fix",
+
+    "start": "concurrently \"npm:anteek:compile\" \"npm:nest:start\" -m 1",
+    "start:dev": "concurrently \"npm:anteek:compile:dev\" \"npm:nest:start:dev\"",
+    "start:prod": "node dist/main",
+
+    "nest:build": "nest build",
+    "nest:start": "nest start",
+    "nest:start:debug": "nest start --debug --watch",
+    "nest:start:dev": "nest start --watch",
+
     "test": "jest",
     "test:watch": "jest --watch --coverage",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "prisma": "prisma format && prisma generate",
+
+    "db": "concurrently \"npm:db:*\" -m 1",
     "db:migrate": "prisma db push",
     "db:seed": "prisma db seed",
-    "db": "npm run db:migrate && npm run db:seed",
-    "generate": "anteek compile src/schema.graphqls"
+
+    "anteek:prisma": "prisma format && prisma generate",
+    "anteek:compile": "anteek compile src/schema.graphqls",
+    "anteek:compile:dev": "anteek compile src/schema.graphqls --watch"
   },
   "dependencies": {
     "@faker-js/faker": "^7.6.0",
@@ -42,6 +50,7 @@
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
     "commander": "^9.4.1",
+    "concurrently": "^7.6.0",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
