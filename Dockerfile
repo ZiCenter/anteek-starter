@@ -12,8 +12,6 @@ COPY . .
 
 ARG DATABASE_CLIENT=postgresql
 
-RUN npm run generate && npm run prisma
-
 RUN npm run build
 
 
@@ -31,9 +29,9 @@ COPY --from=builder ./app/prisma ./prisma
 
 ENV NODE_ENV production
 
-RUN npm run prisma
+RUN npm run anteek:prisma
 
 EXPOSE 3000
 
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "start:prod"]
 
