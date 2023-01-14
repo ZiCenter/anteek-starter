@@ -6,7 +6,8 @@ import { AnteekModule } from '@zicenter/anteek-core';
         AnteekModule.forRoot({
             resolvers: 'dist/**/*.resolver.js',
             functions: 'dist/**/*.function.js',
-            jwt: {}
+            jwt: {},
+            disableGraphIntrospection: process.env.NODE_ENV === 'production'
         })
     ]
 })
