@@ -24,7 +24,7 @@
     "test:watch": "jest --watch --coverage",
     "test:e2e": "jest --config ./test/jest-e2e.json",
 
-    "db": "concurrently \"npm:db:*\" -m 1",
+    "db": "npm run db:migrate && npm run db:seed",
     "db:migrate": "prisma db push",
     "db:seed": "prisma db seed",
 
