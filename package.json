@@ -37,7 +37,7 @@
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
     "@prisma/client": "^4.6.1",
-    "@zicenter/anteek-core": "^3.0.2",
+    "@zicenter/anteek-core": "^3.1.0",
     "dotenv": "^16.0.3"
   },
   "devDependencies": {
