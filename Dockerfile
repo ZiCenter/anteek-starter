@@ -10,8 +10,6 @@ RUN npm install
 
 COPY . .
 
-ARG DATABASE_CLIENT=postgresql
-
 RUN npm run build
 
 
