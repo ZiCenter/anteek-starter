@@ -8,19 +8,19 @@ enum PetStatus {
 
 type Tag {
     name: String
-    pets: [Pet] @many
+    pets: [Pet] @mapsTo(field: "tags")
 }
 
 type Category {
     name: String
-    pets: [Pet] @one
+    pets: [Pet] @mapsTo(field: "category")
 }
 
 type Pet {
-    category: Category @many
+    category: Category @mapsTo(field: "pets")
     name: String
     photoUrl: String
-    tags: [Tag] @many
+    tags: [Tag] @mapsTo(field: "pets")
     status: PetStatus
 }
 
@@ -40,7 +40,7 @@ type Order
 @function(name: "placeOrder", operation: Mutation, input: "PlaceOrderInput")
 {
     pet: Pet
-    user: User @many
+    user: User @mapsTo(field: "orders")
     quantity: Int
     shipDate: DateTime
     status: OrderStatus
@@ -51,7 +51,7 @@ type User {
     name:	String
     email:	String
     password: String @hash
-    orders: [Order] @one
+    orders: [Order] @mapsTo(field: "user")
 }
 
 input PlaceOrderInput {

@@ -1,8 +1,6 @@
 scalar DateTime
 
 directive @mapsTo(field: String) on FIELD_DEFINITION
-directive @many on FIELD_DEFINITION
-directive @one on FIELD_DEFINITION
 directive @hash on FIELD_DEFINITION
 directive @http(input: String = "String", request: HttpRequest!, name: String) repeatable on OBJECT
 directive @database(create: Boolean, list: Boolean, aggregate: Boolean, single: Boolean, update: Boolean, delete: Boolean) on OBJECT
