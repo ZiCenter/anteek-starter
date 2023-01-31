@@ -6,6 +6,7 @@ import { AnteekModule, Policies } from '@zicenter/anteek-core';
         AnteekModule.forRoot({
             resolvers: 'dist/**/*.resolver.js',
             functions: 'dist/**/*.function.js',
+            middlewares: 'dist/**/*.middleware.js',
             jwt: false,
             disableGraphIntrospection: process.env.NODE_ENV === 'production',
             policies: [
