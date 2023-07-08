@@ -11,6 +11,7 @@ async function bootstrap() {
             resolvers: 'dist/**/*.resolver.js',
             functions: 'dist/**/*.function.js',
             middlewares: 'dist/**/*.middleware.js',
+            federated: process.env.FEDERATED === 'true',
             jwt: {
                 secret: 'DevelopmentSecretDoNotUseInProduction!!!',
                 userService: UserService

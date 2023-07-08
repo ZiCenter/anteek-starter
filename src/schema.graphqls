@@ -6,17 +6,20 @@ enum PetStatus {
     available, pending, sold
 }
 
-type Tag {
+type Tag
+@database(create: true, single: true, list: true, update: true, delete: true, aggregate: true) {
     name: String
     pets: [Pet] @mapsTo(field: "tags")
 }
 
-type Category {
+type Category
+@database(create: true, single: true, list: true, update: true, delete: true, aggregate: true) {
     name: String
     pets: [Pet] @mapsTo(field: "category")
 }
 
-type Pet {
+type Pet
+@database(create: true, single: true, list: true, update: true, delete: true, aggregate: true) {
     category: Category @mapsTo(field: "pets")
     name: String
     photoUrl: String
@@ -47,7 +50,8 @@ type Order
     complete: Boolean
 }
 
-type User {
+type User
+@database(create: true, single: true, list: true, update: true, delete: true, aggregate: true) {
     name:	String
     email:	String @prisma(attributes: ["unique"])
     password: String @hash
