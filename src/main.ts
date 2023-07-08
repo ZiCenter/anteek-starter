@@ -1,5 +1,6 @@
 import { AnteekModule, Policies } from '@zicenter/anteek-core';
 import { NestFactory } from '@nestjs/core';
+import { UserService } from './services/user.service';
 
 require('dotenv').config();
 
@@ -10,7 +11,10 @@ async function bootstrap() {
             resolvers: 'dist/**/*.resolver.js',
             functions: 'dist/**/*.function.js',
             middlewares: 'dist/**/*.middleware.js',
-            jwt: false,
+            jwt: {
+                secret: 'DevelopmentSecretDoNotUseInProduction!!!',
+                userService: UserService
+            },
             disableGraphIntrospection: process.env.NODE_ENV === 'production',
             policies: [
                 Policies.General.allowAll()
