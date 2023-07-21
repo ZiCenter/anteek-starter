@@ -29,13 +29,13 @@
     "db:seed": "prisma db seed",
 
     "anteek:prisma": "prisma format && prisma generate",
-    "anteek:compile": "anteek compile src/schema.graphqls",
-    "anteek:compile:dev": "anteek compile src/schema.graphqls --watch"
+    "anteek:compile": "anteek compile",
+    "anteek:compile:dev": "anteek compile --watch"
   },
   "dependencies": {
     "@faker-js/faker": "^7.6.0",
     "@prisma/client": "^4.6.1",
-    "@zicenter/anteek-core": "^4.5.0",
+    "@zicenter/anteek-core": "^4.8.7",
     "dotenv": "^16.0.3"
   },
   "devDependencies": {

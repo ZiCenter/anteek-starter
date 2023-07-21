@@ -22,6 +22,7 @@ async function bootstrap() {
             ],
             imports: [],
             providers: [],
+            // prismaClient: createFederatedPrismaClient
         })
     );
 
