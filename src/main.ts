@@ -1,17 +1,14 @@
-import { AnteekModule, Policies } from '@zicenter/anteek-core';
+import { AnteekModule, Policies, requestLogger } from '@zicenter/anteek-core';
 import { NestFactory } from '@nestjs/core';
 import { UserService } from './services/user.service';
+import { generatedConfig } from '__generated__/anteek.config';
 
 require('dotenv').config();
 
 async function bootstrap() {
-
     const app = await NestFactory.create(
         AnteekModule.forRoot({
-            resolvers: 'dist/**/*.resolver.js',
-            functions: 'dist/**/*.function.js',
-            middlewares: 'dist/**/*.middleware.js',
-            federated: process.env.FEDERATED === 'true',
+            ...generatedConfig,
             jwt: {
                 secret: 'DevelopmentSecretDoNotUseInProduction!!!',
                 userService: UserService
@@ -22,9 +19,10 @@ async function bootstrap() {
             ],
             imports: [],
             providers: [],
-            // prismaClient: createFederatedPrismaClient
         })
     );
+
+    requestLogger(app);
 
     await app.listen(3000);
 }
