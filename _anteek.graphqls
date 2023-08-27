@@ -20,21 +20,24 @@ enum DataSourceType { HTTP DATABASE }
 enum Operation { Query Mutation }
 
 # --------------- ----------- ------------
+# Security Policies
+# ----------------------------------------
+directive @policy(name: String, useExisting: String) repeatable on OBJECT
 
-directive @security(policies: [DatabasePolicy!]) on OBJECT
-directive @policy on FIELD_DEFINITION
+# conditions
+directive @conditions(order: String) repeatable on OBJECT
+directive @role(anyOf: [String!], allOf: [String!]) repeatable on OBJECT
+directive @permission(anyOf: [String!], allOf: [String!]) repeatable on OBJECT
+directive @operation(names: [String!], types: [String!]) repeatable on OBJECT
+directive @time(cron: [String!]) repeatable on OBJECT
+directive @ip(cidr: [String!]) repeatable on OBJECT
 
-input DatabasePolicy {
-    function: String
-    list: PolicyConfig
-    get: PolicyConfig
-    create: PolicyConfig
-    update: PolicyConfig
-    delete: PolicyConfig
-}
+#actions
+directive @actions repeatable on OBJECT
+directive @deny repeatable on OBJECT
+directive @allow repeatable on OBJECT
+directive @owner(userIdField: String = "userId") repeatable on OBJECT
+directive @hide(fields: [String!]) repeatable on OBJECT
+directive @overwrite(data: [[String!]]) repeatable on OBJECT
 
-input PolicyConfig {
-    query: String
-    select: String
-    input: String
-}
+

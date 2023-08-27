@@ -1,0 +1,11 @@
+
+extend type Pet
+@policy(name: "some-policy")
+    @conditions(order: "(1 and 2) or 3")
+        @role(anyOf: ["editor"]) @operation(names: ["delete"])
+    @actions
+        @owner @hide(fields: ["password", "createdAt"])
+        @overwrite(data: [["input.foo", "bar"], ["query.key", "value"]])
+
+extend type Order
+@policy(useExisting: "some-policy")

@@ -35,7 +35,7 @@
   "dependencies": {
     "@faker-js/faker": "^7.6.0",
     "@prisma/client": "^4.6.1",
-    "@zicenter/anteek-core": "^4.9.5",
+    "@zicenter/anteek-core": "^5.0.28",
     "dotenv": "^16.0.3"
   },
   "devDependencies": {

@@ -1,4 +1,4 @@
-import { AnteekModule, Policies, requestLogger } from '@zicenter/anteek-core';
+import { AnteekModule, requestLogger } from '@zicenter/anteek-core';
 import { NestFactory } from '@nestjs/core';
 import { UserService } from './services/user.service';
 import { generatedConfig } from '__generated__/anteek.config';
@@ -14,11 +14,8 @@ async function bootstrap() {
                 userService: UserService
             },
             disableGraphIntrospection: process.env.NODE_ENV === 'production',
-            policies: [
-                Policies.General.allowAll()
-            ],
             imports: [],
-            providers: [],
+            providers: []
         })
     );
 
